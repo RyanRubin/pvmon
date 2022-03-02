@@ -1,0 +1,9 @@
+#define STATE_AP 1
+#define STATE_STA_CONNECTED_SERVER_DOWN 2
+#define STATE_STA_CONNECTED_SERVER_UP 3
+
+#define EEPROM_SAVED_WIFI 0
+#define EEPROM_PASSWORD 32
+#define EEPROM_SERVER_ID 64
+
+extern int state;

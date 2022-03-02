@@ -1,0 +1,119 @@
+<div class="h-100 mx-auto" style="max-width: 625px">
+    <div class="d-flex flex-column card">
+        <div class="p-1 card-header">
+            <div class="d-flex align-items-center">
+                <div class="p-1">
+                    <svg style="height: 25px" viewBox="0 0 640 512">
+                        <path fill="currentColor" d="M431.98 448.01l-47.97.05V416h-128v32.21l-47.98.05c-8.82.01-15.97 7.16-15.98 15.99l-.05 31.73c-.01 8.85 7.17 16.03 16.02 16.02l223.96-.26c8.82-.01 15.97-7.16 15.98-15.98l.04-31.73c.01-8.85-7.17-16.03-16.02-16.02zM585.2 26.74C582.58 11.31 568.99 0 553.06 0H86.93C71 0 57.41 11.31 54.79 26.74-3.32 369.16.04 348.08.03 352c-.03 17.32 14.29 32 32.6 32h574.74c18.23 0 32.51-14.56 32.59-31.79.02-4.08 3.35 16.95-54.76-325.47zM259.83 64h120.33l9.77 96H250.06l9.77-96zm-75.17 256H71.09L90.1 208h105.97l-11.41 112zm16.29-160H98.24l16.29-96h96.19l-9.77 96zm32.82 160l11.4-112h149.65l11.4 112H233.77zm195.5-256h96.19l16.29 96H439.04l-9.77-96zm26.06 256l-11.4-112H549.9l19.01 112H455.33z" class=""></path>
+                    </svg>
+                </div>
+                <div class="p-1 flex-fill">
+                    <h1 class="h4">RR Tech Solar PV Monitor</h1>
+                </div>
+                <div class="p-1">
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">Menu</button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#changePasswordModal">Change password</a>
+                            <a class="dropdown-item" href="#" @click="logout()">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-1 flex-fill card-body overflow-auto">
+            <div class="p-1">
+                <label>Consumption</label>
+            </div>
+            <div class="d-flex">
+                <div class="p-1 flex-fill">
+                    <div class="card bg-primary text-white">
+                        <div class="p-1 card-header">
+                            <div class="p-1 text-center">
+                                <label>Grid</label>
+                            </div>
+                        </div>
+                        <div class="p-1 card-footer">
+                            <div class="p-1 text-center">
+                                <span>{{ grid }} watt(s)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-1 flex-fill">
+                    <div class="card bg-primary text-white">
+                        <div class="p-1 card-header">
+                            <div class="p-1 text-center">
+                                <label>Solar PV</label>
+                            </div>
+                        </div>
+                        <div class="p-1 card-footer">
+                            <div class="p-1 text-center">
+                                <span>{{ pv }} watt(s)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-1">
+                <label>Last updated</label>
+            </div>
+            <div class="p-1">
+                <span>{{ lastUpdated }}</span>
+            </div>
+            <hr>
+            <div class="p-1">
+                <label for="selectDate">Select date</label>
+            </div>
+            <div class="p-1">
+                <input type="date" id="selectDate" class="form-control" v-model="selectDate" @change="selectDateChange()">
+            </div>
+            <div class="p-1">
+                <label>AM</label>
+            </div>
+            <div class="p-1">
+                <canvas ref="chart"></canvas>
+            </div>
+            <div class="p-1">
+                <label>PM</label>
+            </div>
+            <div class="p-1">
+                <canvas ref="chart2"></canvas>
+            </div>
+        </div>
+    </div>
+    <div id="changePasswordModal" class="modal fade" tabindex="-1" data-backdrop="static" ref="changePasswordModal">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="p-1 modal-header">
+                    <div class="p-1">
+                        <h2 class="h4">Change password</h1>
+                    </div>
+                </div>
+                <div class="p-1 modal-body">
+                    <div class="p-1">
+                        <label for="password">New password</label>
+                    </div>
+                    <div class="d-flex">
+                        <div class="p-1 flex-fill">
+                            <input :type="isShowPassword ? 'text' : 'password'" id="password" class="form-control" v-model="password" @keyup.enter="login()">
+                        </div>
+                        <div class="p-1">
+                            <button type="button" class="btn btn-secondary" @click="showPassword()">{{ isShowPassword ? 'Hide' : 'Show' }}</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-1 modal-footer">
+                    <div class="d-flex m-0">
+                        <div class="p-1">
+                            <button type="button" class="btn btn-primary" @click="saveNewPassword()">Save</button>
+                        </div>
+                        <div class="p-1">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
